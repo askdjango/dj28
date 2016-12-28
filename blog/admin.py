@@ -5,7 +5,7 @@ from .forms import PostForm
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'published', 'content_size', 'detail']
+    list_display = ['id', 'title', 'lnglat', 'published', 'content_size', 'detail']
     list_display_links = ['id', 'title']
     list_filter = ['created_at', 'published']
     search_fields = ['title']  # where ilike SQL 로서 수행
