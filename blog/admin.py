@@ -9,6 +9,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'lnglat_naver_static_image', 'published', 'content_size', 'detail']
     list_display_links = ['id', 'title']
     list_filter = ['created_at', 'published']
+    list_editable = ['published']
     search_fields = ['title']  # where ilike SQL 로서 수행
     actions = ['make_published']
     # fields = ['title']  # 기존 model form 에 대한 Meta 속성 지정
