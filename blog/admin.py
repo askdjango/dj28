@@ -6,6 +6,7 @@ from .models import Post, Comment
 class PostAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'published', 'content_size', 'detail']
     list_display_links = ['id', 'title']
+    search_fields = ['title']  # where ilike SQL 로서 수행
     actions = ['make_published']
 
     def get_queryset(self, request):
