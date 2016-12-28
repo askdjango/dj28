@@ -1,3 +1,5 @@
+from urllib.parse import urlencode
+from django.conf import settings
 from django.db import models
 from .validators import lnglat_validator
 
@@ -13,6 +15,34 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def lat(self):
+        if self.lnglat:
+            return self.lnglat.split(',')[-1]
+        return None
+
+    @property
+    def lng(self):
+        if self.lnglat:
+            return self.lnglat.split(',')[0]
+        return None
+
+    def get_lnglat_naver_static_url(self, width=72, height=72, level=8):
+        if self.lnglat:
+            url = 'https://openapi.naver.com/v1/map/staticmap.bin'
+            params = {
+                'url': 'http://localhost:8000',
+                'clientId': settings.NAVER_APP_CLIENT_ID,
+                'center': self.lnglat,
+                'level': level,
+                'w': width,
+                'h': height,
+                'baselayer': 'default',
+                'markers': self.lnglat,
+            }
+            return url + '?' + urlencode(params)
+        return None
 
 
 class Comment(models.Model):
