@@ -6,10 +6,16 @@ from .models import Post, Comment
 class PostAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'published', 'content_size', 'detail']
     list_display_links = ['id', 'title']
+    actions = ['make_published']
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.prefetch_related('comment_set')
+
+    def make_published(self, request, queryset):
+        total = queryset.update(published=True)
+        self.message_user(request, '{}개의 글을 공개전환했습니다.'.format(total))
+    make_published.short_description = "Mark selected stories as published"
 
     def content_size(self, post):
         return '{}글자'.format(len(post.content))
