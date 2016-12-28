@@ -7,6 +7,7 @@ from .forms import PostForm
 class PostAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'published', 'content_size', 'detail']
     list_display_links = ['id', 'title']
+    list_filter = ['created_at', 'published']
     search_fields = ['title']  # where ilike SQL 로서 수행
     actions = ['make_published']
     # fields = ['title']  # 기존 model form 에 대한 Meta 속성 지정
