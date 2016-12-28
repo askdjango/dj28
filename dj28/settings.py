@@ -123,3 +123,5 @@ INTERNAL_IPS = ['127.0.0.1']
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+NAVER_APP_CLIENT_ID = 'q768Dik7KEKSuu2Eodwy'

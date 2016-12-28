@@ -1,0 +1,33 @@
+
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId={{ naver_app_client_id }}"></script>
+
+<div id="{{ id }}_map" style="width: {{ width }}; height: {{ height }};"></div>
+
+<script>
+var point = new naver.maps.LatLng({{ lat }}, {{ lng }});
+
+var mapOptions = {
+    center: point,
+    zoom: 10,
+    scaleControl: true,
+    logoControl: true,
+    mapDataControl: true,
+    zoomControl: true
+};
+var map = new naver.maps.Map('{{ id }}_map', mapOptions);
+
+var marker = new naver.maps.Marker({
+    position: point,
+    map: map,
+    draggable: true
+});
+
+naver.maps.Event.addListener(map, 'click', function(e) {
+    marker.setPosition(e.coord);
+});
+
+naver.maps.Event.addListener(marker, 'position_changed', function(position) {
+    var val = position.lng() + "," + position.lat();
+    document.getElementById('{{ id }}').value = val;
+});
+</script>
