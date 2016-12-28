@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Post, Comment
+from .forms import PostForm
 
 
 @admin.register(Post)
@@ -8,6 +9,8 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ['id', 'title']
     search_fields = ['title']  # where ilike SQL 로서 수행
     actions = ['make_published']
+    # fields = ['title']  # 기존 model form 에 대한 Meta 속성 지정
+    form = PostForm  # custom form class
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
