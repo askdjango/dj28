@@ -4,7 +4,7 @@ from .models import Post, Comment
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'content_size', 'detail']
+    list_display = ['id', 'title', 'published', 'content_size', 'detail']
     list_display_links = ['id', 'title']
 
     def get_queryset(self, request):
